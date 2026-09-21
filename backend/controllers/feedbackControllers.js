@@ -38,7 +38,7 @@ export const getMyFeedback = async (req, res) => {
   try {
     const feedback = await Feedback.find({
       user: req.user._id,
-    });
+    }).sort({ createdAt: -1 });
 
     return res.status(200).json({
       feedback,

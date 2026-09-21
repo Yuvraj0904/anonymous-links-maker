@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import crypto from "crypto";
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 export const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -72,19 +72,26 @@ export const loginUser = async (req, res) => {
       expiresIn: "7d",
     });
 
-   res.cookie("token", token, {
-     httpOnly: true,
-     secure: false,
-     sameSite: "lax",
-     maxAge: 7 * 24 * 60 * 60 * 1000,
-   });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
 
-   res.status(200).json({
-     message: "Login successful",
-   });
+    res.status(200).json({
+      message: "Login successful",
+    });
   } catch (error) {
     res.status(500).json({
       message: "Server error",
     });
   }
+};
+export const logoutUser = async (req, res) => {
+  res.clearCookie("token");
+
+  return res.status(200).json({
+    message: "Logout successful",
+  });
 };
