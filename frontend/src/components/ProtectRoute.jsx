@@ -27,7 +27,12 @@ function ProtectedRoute({ children }) {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="page-loader">
+        <div className="page-loader-spinner" />
+        <span className="page-loader-text">Authenticating…</span>
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
