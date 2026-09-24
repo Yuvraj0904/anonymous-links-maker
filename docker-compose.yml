@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./backend
+    container_name: anonymous-feedback-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:3000
+    container_name: anonymous-feedback-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
