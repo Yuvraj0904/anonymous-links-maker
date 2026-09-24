@@ -1,10 +1,3 @@
-/* ============================================================
-   CANDOR — Design System
-   Palette: Dark Charcoal + Warm Ivory + Amber Accent
-   Typography: Manrope (display) + IBM Plex Sans (body)
-   ============================================================ */
-
-/* ---------- Custom Properties ---------- */
 :root {
   --bg-base:        #0f0e0c;
   --bg-surface:     #161412;

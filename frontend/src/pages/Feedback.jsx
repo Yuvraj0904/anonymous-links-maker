@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import api from "../api";
 
 function Feedback() {
   const { feedbackLink } = useParams();
@@ -20,8 +18,8 @@ function Feedback() {
     setError("");
 
     try {
-      const response = await axios.post(
-        `${API_URL}/api/feedback/${feedbackLink}`,
+      const response = await api.post(
+        `/api/feedback/${feedbackLink}`,
         {
           message,
         },

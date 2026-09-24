@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import api from "../api";
 
 function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
@@ -11,9 +9,7 @@ function ProtectedRoute({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await axios.get(`${API_URL}/api/auth/me`, {
-          withCredentials: true,
-        });
+        await api.get("/api/auth/me");
 
         setIsAuthenticated(true);
       } catch (error) {

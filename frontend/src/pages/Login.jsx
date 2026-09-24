@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import api from "../api";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -27,9 +25,7 @@ function Login() {
     setMessage("");
 
     try {
-      const response = await axios.post(`${API_URL}/api/auth/login`, formData, {
-        withCredentials: true,
-      });
+     const response = await api.post("/api/auth/login", formData);
 
       console.log(response.data);
       navigate("/dashboard");

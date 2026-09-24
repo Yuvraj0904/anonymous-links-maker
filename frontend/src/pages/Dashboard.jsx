@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { useNavigate } from "react-router-dom";
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -12,13 +10,7 @@ function Dashboard() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(
-        `${API_URL}/api/auth/logout`,
-        {},
-        {
-          withCredentials: true,
-        },
-      );
+      await api.post("/api/auth/logout");
 
       navigate("/login");
     } catch (error) {
@@ -29,9 +21,7 @@ function Dashboard() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/auth/me`, {
-          withCredentials: true,
-        });
+        const response = await api.get("/api/auth/me");
 
         setUser(response.data.user);
       } catch (error) {
@@ -41,9 +31,7 @@ function Dashboard() {
 
     const getFeedback = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/feedback`, {
-          withCredentials: true,
-        });
+        const response = await api.get("/api/feedback");
 
         setFeedback(response.data.feedback);
       } catch (error) {
